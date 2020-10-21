@@ -1,0 +1,20 @@
+{
+  "name": "itemReceiptConfirmation",
+  "version": "1.0.0",
+  "description": "Item Receipt Confimation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjsf/project_0.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kjsf/project_0/issues"
+  },
+  "homepage": "https://github.com/kjsf/project_0#readme"
+}
