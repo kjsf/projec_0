@@ -1,3 +1,3 @@
-# project_0
+# ECE199R: Web App Project
 
 Item Receipt Confimation
