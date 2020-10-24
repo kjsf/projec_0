@@ -15,10 +15,17 @@ app.use(morgan("common"));
 app.use(helmet());
 app.use(express.json());
 app.use(passport.initialize());
+app.use(express.static("public"));
+app.set("view engine", "ejs");
 
 // import routes
 const usersRoute = require("./routes/usersRoute");
 const itemsRoute = require("./routes/itemsRoute");
+
+// test
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
 // routes
 app.use("/user", usersRoute);
