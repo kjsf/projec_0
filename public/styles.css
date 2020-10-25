@@ -1,0 +1,194 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-weight: 400;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: auto;
+  background-color: #eeee;
+}
+
+/* HEADER */
+
+nav {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  height: 8vh;
+  background-color: #94192f;
+}
+.nav-links {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.mapua {
+  font-family: Roboto Slab;
+  font-weight: 500;
+  color: #ffffff;
+  transition: 0.2s;
+}
+
+.mapua:hover {
+  color: #fcc403;
+}
+
+.links-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.links-container a {
+  font-family: Roboto Slab;
+  color: #fcc403;
+  margin: 0 0 0 1rem;
+  transition: 0.2s;
+}
+
+.links-container a:hover {
+  color: white;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  height: 9vh;
+  background-color: #c1213d;
+}
+
+.title h1 {
+  font-family: Roboto Slab;
+  font-size: 1.2rem;
+  font-weight: 400;
+  width: 80%;
+  margin: auto;
+  color: white;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+  margin: auto;
+}
+
+.hero h1 {
+  font-size: 5rem;
+  text-align: center;
+}
+
+#mapua-logo {
+  width: 30%;
+}
+
+/* FORMS */
+form {
+  background-color: white;
+  border-radius: 1em;
+}
+
+.forms-container {
+  padding: 2em;
+}
+
+.forms-title {
+  display: flex;
+  align-items: center;
+  height: 9vh;
+  background-color: #c1213d;
+}
+
+.forms-title h1 {
+  font-family: Roboto Slab;
+  font-size: 1.5rem;
+  font-weight: 400;
+  width: 80%;
+  margin: auto;
+  color: white;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+}
+
+button {
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  background-color: #94192f;
+  color: #fcc403;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  align-self: center;
+}
+
+button:hover {
+  background-color: #c1213d;
+  color: white;
+}
+
+/* FOOTER */
+
+footer {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 8vh;
+  background-color: #282828;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  font-size: 0.8rem;
+  color: #56585d;
+}
+
+.svg-github {
+  width: 2rem;
+  height: auto;
+  fill: white;
+  transition: 0.2s;
+  margin: 0 0.9rem;
+}
+
+.footer-links :hover {
+  fill: #fcc403;
+}
