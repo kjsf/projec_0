@@ -7,8 +7,9 @@
       <h1>Item Receipt Confirmation</h1>
     </div>
     <main>
-      <form action="/users/login" method="post">
+      <form>
         <div class="forms-container">
+          <div class="formError"></div>
           <div class="flex">
             <label for="username"><b>Username:</b></label>
             <input
@@ -34,4 +35,32 @@
     </main>
     <%- include('./partials/footer.ejs') %>
   </body>
+  <script>
+    const form = document.querySelector("form");
+    const formError = document.querySelector(".formError");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const username = form.username.value;
+      const password = form.password.value;
+
+      try {
+        const res = await fetch("/users/login", {
+          method: "post",
+          body: JSON.stringify({ username, password }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await res.json();
+        console.log(data.success);
+        if (data.success) {
+          location.assign("/users/submit");
+        } else {
+          formError.textContent = "Incorrect Username/Password";
+        }
+      } catch (err) {
+        formError.textContent = "Incorrect Username/Password";
+      }
+    });
+  </script>
 </html>

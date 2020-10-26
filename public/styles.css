@@ -141,10 +141,18 @@ form {
 .forms-title h1 {
   font-family: Roboto Slab;
   font-size: 1.5rem;
-  font-weight: 400;
   width: 80%;
   margin: auto;
   color: white;
+  text-align: center;
+}
+
+.formError {
+  font-family: Roboto Slab;
+  font-size: 0.8rem;
+  width: 80%;
+  margin: auto;
+  color: red;
   text-align: center;
 }
 

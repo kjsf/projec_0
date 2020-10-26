@@ -41,45 +41,63 @@ userRouter
     }
   });
 
-userRouter.post("/signup", (req, res) => {
-  console.log(`GOT HIT`);
-  console.log(req.body);
-  Users.register(
-    new Users({ username: req.body.username }),
-    req.body.password,
-    (err, user) => {
-      if (err) {
-        res.status(403).json({ err: err });
-      } else {
-        if (req.body.firstname) {
-          user.firstname = req.body.firstname;
-        }
-        if (req.body.lastname) {
-          user.lastname = req.body.lastname;
-        }
-        user.save((err, user) => {
-          if (err) {
-            res.status(403).json({ err: err });
-          }
-          passport.authenticate("local")(req, res, () => {
-            res.redirect("/login");
-          });
-        });
-      }
-    }
-  );
-});
+userRouter
+  .route("/register")
+  .get((req, res, next) => {
+    res.render("register");
+  })
+  .post((req, res) => {
+    console.log(`Register Hit`);
 
-userRouter.post("/login", passport.authenticate("local"), (req, res, next) => {
-  const token = authenticate.getToken({ _id: req.user._id });
-  console.log(req.body);
-  const user = req.body.username;
-  res.render("submit", { user: user });
-});
+    Users.register(
+      new Users({ username: req.body.username }),
+      req.body.password,
+      (err, user) => {
+        if (err) {
+          res.status(403).json({ err: err });
+        } else {
+          if (req.body.firstname) {
+            user.firstname = req.body.firstname;
+          }
+          if (req.body.lastname) {
+            user.lastname = req.body.lastname;
+          }
+          user.save((err, user) => {
+            if (err) {
+              res.status(403).json({ err: err });
+            }
+            passport.authenticate("local")(req, res, () => {
+              res.status(200).json({ user: user._id });
+            });
+          });
+        }
+      }
+    );
+  });
+
+userRouter
+  .route("/login")
+  .get((req, res, next) => {
+    res.render("login");
+  })
+  .post(passport.authenticate("local"), (req, res, next) => {
+    console.log(`Login Hit`);
+    const token = authenticate.getToken({ _id: req.user._id });
+    console.log(token);
+    console.log(req.body);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: 60 * 60 * 1000 });
+    res.status(200).json({ success: true });
+  });
 
 userRouter.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.cookie("jwt", "", { maxAge: 1 }).redirect("/");
+});
+
+userRouter.route("/submit").get((req, res, next) => {
+  console.log(`Submit got hit`);
+  console.log(req.body);
+  res.render("submit");
 });
 
 userRouter
