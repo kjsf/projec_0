@@ -13,7 +13,69 @@
   </head>
   <body>
     <%- include('partials/header.ejs') %>
-    <h1>This is Signup</h1>
+    <div class="forms-title">
+      <h1>Item Receipt Confirmation</h1>
+    </div>
+    <main>
+      <form action="/signup" method="post">
+        <div class="forms-container">
+          <h1>Please enter the following information:</h1>
+          <div class="flex">
+            <label for="firstname"><b>Firstname:</b></label>
+            <input
+              id="firstname"
+              type="text"
+              placeholder="Firstname"
+              name="firstname"
+              required
+            />
+          </div>
+          <div class="flex">
+            <label for="lastname"><b>Lastname:</b></label>
+            <input
+              id="lastname"
+              type="text"
+              placeholder="Lastname"
+              name="lastname"
+              required
+            />
+          </div>
+          <div class="flex">
+            <label for="username"><b>Username:</b></label>
+            <input
+              id="username"
+              type="text"
+              placeholder="Username"
+              name="username"
+              required
+            />
+          </div>
+          <div class="flex">
+            <label for="password"><b>Password:</b></label>
+
+            <input
+              id="Password"
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+            />
+          </div>
+          <div class="flex">
+            <label for="confirmPassword"><b>Confirm:</b></label>
+
+            <input
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              name="password"
+              required
+            />
+          </div>
+          <button type="submit">Sign Up</button>
+        </div>
+      </form>
+    </main>
     <%- include('partials/footer.ejs') %>
   </body>
 </html>

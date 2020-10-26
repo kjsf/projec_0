@@ -13,7 +13,58 @@
   </head>
   <body>
     <%- include('partials/header.ejs') %>
-    <h1>This is Submit</h1>
+    <div class="forms-title">
+      <h1>Item Receipt Confirmation</h1>
+    </div>
+    <main>
+      <form action="/submit" method="post">
+        <div class="forms-container">
+          <h1>Please enter the item information:</h1>
+          <div class="flex">
+            <label for="unitcode"><b>Code:</b></label>
+            <input
+              id="unitcode"
+              type="text"
+              placeholder="Unit Code"
+              name="unitcode"
+              required
+            />
+          </div>
+          <div class="flex">
+            <label for="unitcount"><b>Count:</b></label>
+            <input
+              id="unitcount"
+              type="text"
+              placeholder="Unit Count"
+              name="unitcount"
+              required
+            />
+          </div>
+          <div class="flex">
+            <label for="condition"><b>Condition:</b></label>
+            <input
+              id="condition"
+              type="text"
+              placeholder="Item Condition"
+              name="condition"
+              required
+            />
+          </div>
+          <div class="flex">
+            <label for="remarks"><b>Remarks:</b></label>
+
+            <input
+              id="remarks"
+              type="text"
+              placeholder="Remarks"
+              name="remarks"
+              required
+            />
+          </div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </main>
     <%- include('partials/footer.ejs') %>
   </body>
 </html>
