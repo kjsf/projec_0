@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ECE199R Web App</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="shortcut icon" href="mapua.ico" type="image/x-icon" />
-  </head>
+  <%- include('./partials/head.ejs') %>
   <body>
-    <%- include('partials/header.ejs') %>
+    <nav>
+      <div class="nav-links">
+        <a href="/" class="mapua">Map&uacutea University</a>
+        <ul class="links-container">
+          <li><a href="/users/logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
     <div class="forms-title">
-      <h1>Item Receipt Confirmation</h1>
+      <h1>User: <%= user%></h1>
     </div>
     <main>
       <form action="/submit" method="post">

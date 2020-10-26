@@ -10,22 +10,24 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const db = process.env.MONGO_URI;
 
+// import routes
+const userRouter = require("./routes/usersRouter");
+const itemsRouter = require("./routes/itemsRouter");
+
 // middlewares
 app.use(morgan("common"));
 app.use(helmet());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-
-// import routes
-const usersRoute = require("./routes/usersRoute");
-const itemsRoute = require("./routes/itemsRoute");
 
 // test
 app.get("/", (req, res) => {
   res.render("index");
 });
+
 app.get("/login", (req, res) => {
   res.render("login");
 });
@@ -37,8 +39,8 @@ app.get("/submit", (req, res) => {
 });
 
 // routes
-app.use("/user", usersRoute);
-app.use("/items", itemsRoute);
+app.use("/users", userRouter);
+app.use("/items", itemsRouter);
 
 // error handling
 app.use(errors.notFound);

@@ -1,9 +1,11 @@
 const express = require("express");
 const Users = require("../models/users");
+const passport = require("passport");
+const authenticate = require("../config/authenticate");
 
-const usersRoute = express.Router();
+const userRouter = express.Router();
 
-usersRoute
+userRouter
   .route("/")
   .get(async (req, res) => {
     try {
@@ -16,6 +18,7 @@ usersRoute
   .post(async (req, res, next) => {
     try {
       console.log(`POST USER`);
+      res.send(`HI`);
       res.end();
     } catch (e) {
       next(e);
@@ -38,7 +41,48 @@ usersRoute
     }
   });
 
-usersRoute
+userRouter.post("/signup", (req, res) => {
+  console.log(`GOT HIT`);
+  console.log(req.body);
+  Users.register(
+    new Users({ username: req.body.username }),
+    req.body.password,
+    (err, user) => {
+      if (err) {
+        res.status(403).json({ err: err });
+      } else {
+        if (req.body.firstname) {
+          user.firstname = req.body.firstname;
+        }
+        if (req.body.lastname) {
+          user.lastname = req.body.lastname;
+        }
+        user.save((err, user) => {
+          if (err) {
+            res.status(403).json({ err: err });
+          }
+          passport.authenticate("local")(req, res, () => {
+            res.redirect("/login");
+          });
+        });
+      }
+    }
+  );
+});
+
+userRouter.post("/login", passport.authenticate("local"), (req, res, next) => {
+  const token = authenticate.getToken({ _id: req.user._id });
+  console.log(req.body);
+  const user = req.body.username;
+  res.render("submit", { user: user });
+});
+
+userRouter.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+userRouter
   .route("/:userid")
   .get((req, res) => {
     console.log(`Get ${req.params.userid} USER`);
@@ -69,4 +113,4 @@ usersRoute
     }
   });
 
-module.exports = usersRoute;
+module.exports = userRouter;

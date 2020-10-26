@@ -1,9 +1,9 @@
 const express = require("express");
 const Items = require("../models/items");
 
-const itemsRoute = express.Router();
+const itemsRouter = express.Router();
 
-itemsRoute
+itemsRouter
   .route("/")
   .get(async (req, res) => {
     try {
@@ -38,7 +38,7 @@ itemsRoute
     }
   });
 
-itemsRoute
+itemsRouter
   .route("/:itemid")
   .get((req, res) => {
     console.log(`Get ${req.params.userid} USER`);
@@ -69,4 +69,4 @@ itemsRoute
     }
   });
 
-module.exports = itemsRoute;
+module.exports = itemsRouter;

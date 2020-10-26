@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ECE199R Web App</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="shortcut icon" href="mapua.ico" type="image/x-icon" />
-  </head>
+  <%- include('./partials/head.ejs') %>
   <body>
-    <%- include('partials/header.ejs') %>
+    <%- include('./partials/header.ejs') %>
     <div class="forms-title">
       <h1>Item Receipt Confirmation</h1>
     </div>
     <main>
-      <form action="/login" method="post">
+      <form action="/users/login" method="post">
         <div class="forms-container">
           <div class="flex">
             <label for="username"><b>Username:</b></label>
@@ -42,6 +32,6 @@
         </div>
       </form>
     </main>
-    <%- include('partials/footer.ejs') %>
+    <%- include('./partials/footer.ejs') %>
   </body>
 </html>
