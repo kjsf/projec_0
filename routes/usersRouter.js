@@ -94,11 +94,14 @@ userRouter.get("/logout", (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 }).redirect("/");
 });
 
-userRouter.route("/submit").get((req, res, next) => {
-  console.log(`Submit got hit`);
-  console.log(req.body);
-  res.render("submit");
-});
+userRouter
+  .route("/submit")
+  .get(authenticate.verifyOrdinaryUser, (req, res, next) => {
+    console.log(`Submit got hit`);
+    console.log(req.user);
+    user = req.user.username;
+    res.render("submit", { user });
+  });
 
 userRouter
   .route("/:userid")

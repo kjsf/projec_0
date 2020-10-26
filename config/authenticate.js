@@ -20,8 +20,16 @@ exports.getToken = (user) => {
   );
 };
 
+const cookieExtractor = (req) => {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies["jwt"];
+  }
+  return token;
+};
+
 const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = process.env.JWT_SECRET;
 
 exports.jwtPassport = passport.use(
