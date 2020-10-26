@@ -5,6 +5,7 @@ const errors = require("./config/errors");
 const helmet = require("helmet");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
+const authenticate = require("./config/authenticate");
 require("dotenv").config();
 
 const app = express();

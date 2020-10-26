@@ -48,7 +48,6 @@ userRouter
   })
   .post((req, res) => {
     console.log(`Register Hit`);
-
     Users.register(
       new Users({ username: req.body.username }),
       req.body.password,
@@ -78,6 +77,9 @@ userRouter
 userRouter
   .route("/login")
   .get((req, res, next) => {
+    if (req.cookies["jwt"]) {
+      res.redirect("/users/submit");
+    }
     res.render("login");
   })
   .post(passport.authenticate("local"), (req, res, next) => {
