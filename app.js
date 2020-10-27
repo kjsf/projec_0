@@ -10,7 +10,6 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const db = process.env.MONGO_URI;
 
 // import routes
 const userRouter = require("./routes/usersRouter");
@@ -39,17 +38,18 @@ app.use(errors.notFound);
 app.use(errors.errorHandler);
 
 // connect to atlas and run server
-(async () => {
-  try {
-    await mongoose.connect(db, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    });
+mongoose.connect(
+  process.env.MONGO_URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  },
+  () => {
     console.log(`Successfully connected to Atlas`);
-    app.listen(PORT);
-    console.log(`Server Listening at port ${PORT}`);
-  } catch (e) {
-    console.log(e);
   }
-})();
+);
+
+app.listen(PORT, () => {
+  console.log(`Server Listening at port ${PORT}`);
+});
