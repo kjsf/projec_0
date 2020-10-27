@@ -2,10 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const errors = require("./config/errors");
-const helmet = require("helmet");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
-const authenticate = require("./config/authenticate");
 require("dotenv").config();
 
 const app = express();
@@ -17,7 +15,6 @@ const itemsRouter = require("./routes/itemsRouter");
 
 // middlewares
 app.use(morgan("dev"));
-//app.use(helmet());
 app.use(express.json());
 app.use(passport.initialize());
 app.use(cookieParser());
