@@ -78,15 +78,14 @@ userRouter
   .route("/login")
   .get((req, res, next) => {
     if (req.cookies["jwt"]) {
-      res.redirect("/users/submit");
+      res.status(302).redirect("/users/submit");
+    } else {
+      res.render("login");
     }
-    res.render("login");
   })
   .post(passport.authenticate("local"), (req, res, next) => {
     console.log(`Login Hit`);
     const token = authenticate.getToken({ _id: req.user._id });
-    console.log(token);
-    console.log(req.body);
     res.cookie("jwt", token, { httpOnly: true, maxAge: 60 * 60 * 1000 });
     res.status(200).json({ success: true });
   });
@@ -99,8 +98,6 @@ userRouter.get("/logout", (req, res) => {
 userRouter
   .route("/submit")
   .get(authenticate.verifyOrdinaryUser, (req, res, next) => {
-    console.log(`Submit got hit`);
-    console.log(req.user);
     user = req.user.username;
     res.render("submit", { user });
   });

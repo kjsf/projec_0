@@ -14,9 +14,10 @@
       <h1>User: <%= user%></h1>
     </div>
     <main>
-      <form action="/submit" method="post">
+      <form>
         <div class="forms-container">
           <h1>Please enter the item information:</h1>
+          <div class="formError"></div>
           <div class="flex">
             <label for="unitcode"><b>Code:</b></label>
             <input
@@ -64,4 +65,35 @@
     </main>
     <%- include('partials/footer.ejs') %>
   </body>
+  <script>
+    const form = document.querySelector("form");
+    const formError = document.querySelector(".formError");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const unitcode = form.unitcode.value;
+      const unitcount = form.unitcount.value;
+      const condition = form.condition.value;
+      const remarks = form.remarks.value;
+
+      try {
+        const res = await fetch("/items", {
+          method: "post",
+          body: JSON.stringify({ unitcode, unitcount, condition, remarks }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.success) {
+          alert("Submission Successful");
+          location.assign("/users/submit");
+        } else {
+          formError.textContent = "Submission Error";
+        }
+      } catch (err) {
+        formError.textContent = "Submission Error";
+      }
+    });
+  </script>
 </html>

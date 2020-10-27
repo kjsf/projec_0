@@ -6,7 +6,6 @@ const itemschema = new Schema(
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     unitcode: { type: String, required: true },
     unitcount: { type: Number, required: true },
-    unitcount: { type: Number, required: true },
     condition: { type: String, required: true },
     remarks: { type: String, required: true },
   },
