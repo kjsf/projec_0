@@ -12,3 +12,7 @@
 - Express
 - Embedded Javascript Templates
 - MongoDB (Atlas)
+- Mongoose ODM
+- Javascript Web Tokens
+
+[Visit the app](https://ece199r.herokuapp.com "https://ece199r.herokuapp.com")
