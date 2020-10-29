@@ -10,7 +10,7 @@ userRouter
   .get((req, res, next) => {
     res.render("register");
   })
-  .post((req, res) => {
+  .post(async (req, res) => {
     console.log(`Register Hit`);
     Users.register(
       new Users({ username: req.body.username }),

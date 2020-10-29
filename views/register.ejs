@@ -90,7 +90,15 @@
             headers: { "Content-Type": "application/json" },
           });
           const data = await res.json();
-          location.assign("/users/login");
+          if (data.err) {
+            if (data.err.name === "UserExistsError") {
+              formError.textContent = "Username already exists";
+            } else {
+              formError.textContent = "Something went wrong";
+            }
+          } else {
+            location.assign("/users/login");
+          }
         } else {
           formError.textContent = "Passwords do not match.";
         }
