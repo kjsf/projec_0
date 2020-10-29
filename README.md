@@ -4,7 +4,7 @@
 
 ### Description
 
-<p>The app confirms receipt of items sent. User must create an account to use it. User must include the following item information: unit code, unit count, condition and remarks. The database keeps track of all items received by the users of the app.</p>
+<p>The app confirms receipt of items sent to the user. User must create an account and the following item information must be included in the submission: unit code, unit count, condition and remarks. The database keeps track of all items received by the users of the app.</p>
 
 ### Technologies Used
 
