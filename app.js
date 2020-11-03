@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-// test
+// index
 app.get("/", (req, res) => {
   res.render("index");
 });

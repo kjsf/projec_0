@@ -92,7 +92,7 @@
           const data = await res.json();
           if (data.err) {
             if (data.err.name === "UserExistsError") {
-              formError.textContent = "Username already exists";
+              formError.textContent = "Username already taken";
             } else {
               formError.textContent = "Something went wrong";
             }
