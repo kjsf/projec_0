@@ -47,4 +47,16 @@ exports.jwtPassport = passport.use(
   })
 );
 
-exports.verifyOrdinaryUser = passport.authenticate("jwt", { session: false });
+exports.verifyOrdinaryUser = (req, res, next) => {
+  passport.authenticate("jwt", { session: false }, (err, user, info) => {
+    if (err) {
+      next(err);
+    }
+    if (!user) {
+      const err = new Error(`Unauthorized: Please Login`);
+      next(err);
+    }
+    req.user = user;
+    next();
+  })(req, res, next);
+};
