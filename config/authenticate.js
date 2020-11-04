@@ -53,6 +53,7 @@ exports.verifyOrdinaryUser = (req, res, next) => {
       next(err);
     }
     if (!user) {
+      res.status(403);
       const err = new Error(`Unauthorized: Please Login`);
       next(err);
     }

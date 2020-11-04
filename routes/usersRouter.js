@@ -19,12 +19,8 @@ userRouter
         if (err) {
           res.status(403).json({ err: err });
         } else {
-          if (req.body.firstname) {
-            user.firstname = req.body.firstname;
-          }
-          if (req.body.lastname) {
-            user.lastname = req.body.lastname;
-          }
+          user.firstname = req.body.firstname;
+          user.lastname = req.body.lastname;
           user.save((err, user) => {
             if (err) {
               next(err);
