@@ -53,7 +53,7 @@
         });
         const data = await res.json();
         if (data.success) {
-          location.assign("/users/submit");
+          location.assign("/users/items");
         } else {
           formError.textContent = "Incorrect Username/Password";
         }

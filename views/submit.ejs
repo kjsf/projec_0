@@ -11,58 +11,61 @@
       </div>
     </nav>
     <div class="forms-title">
-      <h1>User: <%= user%></h1>
+      <h1>User: <%= user%> Item Count: <%= count%></h1>
     </div>
-    <main>
+    <div class="submitMain">
       <form>
         <div class="forms-container">
           <h1>Please enter the item information:</h1>
           <div class="formError"></div>
+          <%for (let i=1;i< +count + +1;i++){%> <%console.log([i])%>
+          <h1 class="itemNumber">--- Item <%= [i]%> ---</h1>
           <div class="flex">
-            <label for="unitcode"><b>Code:</b></label>
+            <label for="unitcode<%=[i]%>"><b>Code:</b></label>
             <input
-              id="unitcode"
+              id="unitcode<%=[i]%>"
               type="text"
               placeholder="Unit Code"
-              name="unitcode"
+              name="unitcode<%=[i]%>"
               required
             />
           </div>
           <div class="flex">
-            <label for="unitcount"><b>Count:</b></label>
+            <label for="unitcount<%=[i]%>"><b>Count:</b></label>
             <input
-              id="unitcount"
+              id="unitcount<%=[i]%>"
               type="number"
               placeholder="Unit Count"
-              name="unitcount"
+              name="unitcount<%=[i]%>"
               required
             />
           </div>
           <div class="flex">
-            <label for="condition"><b>Condition:</b></label>
+            <label for="condition<%=[i]%>"><b>Condition:</b></label>
             <input
-              id="condition"
+              id="condition<%=[i]%>"
               type="text"
-              placeholder="Item Condition"
-              name="condition"
+              placeholder="Item <%=[i]%> Condition"
+              name="condition<%=[i]%>"
               required
             />
           </div>
           <div class="flex">
-            <label for="remarks"><b>Remarks:</b></label>
+            <label for="remarks<%=[i]%>"><b>Remarks:</b></label>
 
             <input
-              id="remarks"
+              id="remarks<%=[i]%>"
               type="text"
               placeholder="Remarks"
-              name="remarks"
+              name="remarks<%=[i]%>"
               required
             />
           </div>
+          <%}%>
           <button type="submit">Submit</button>
         </div>
       </form>
-    </main>
+    </div>
     <%- include('partials/footer.ejs') %>
   </body>
   <script>
@@ -72,21 +75,31 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const unitcode = form.unitcode.value;
-      const unitcount = form.unitcount.value;
-      const condition = form.condition.value;
-      const remarks = form.remarks.value;
+        let formData = []
+          for (let i = 1; i < +<%=count%> + +1; i++) {
+                let unitcode = "unitcode"+[i]
+                let unitcount = "unitcount"+[i]
+                let condition = "condition"+[i]
+                let remarks = "remarks"+[i]
+                formData.push({
+                      unitcode:form.elements.namedItem(unitcode).value,
+                      unitcount:form.elements.namedItem(unitcount).value,
+                      condition:form.elements.namedItem(condition).value,
+                      remarks:form.elements.namedItem(remarks).value,
+                    })
+
+      }
 
       try {
         const res = await fetch("/items", {
           method: "post",
-          body: JSON.stringify({ unitcode, unitcount, condition, remarks }),
+          body: JSON.stringify(formData),
           headers: { "Content-Type": "application/json" },
         });
         const data = await res.json();
         if (data.success) {
           alert("Submission Successful");
-          location.assign("/users/submit");
+          location.assign("/");
         } else {
           formError.textContent = "Submission Error";
         }

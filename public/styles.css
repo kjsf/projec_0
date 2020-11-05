@@ -88,6 +88,12 @@ main {
   height: 75vh;
 }
 
+.submitMain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .hero {
   display: flex;
   align-items: center;
@@ -117,8 +123,13 @@ main {
 form {
   background-color: white;
   border-radius: 1em;
+  margin: 3em;
 }
 
+.itemNumber {
+  align-self: center;
+  color: red;
+}
 .forms-container {
   padding: 2em;
   display: flex;

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <nav>
+      <div class="nav-links">
+        <a href="/" class="mapua">Map&uacutea University</a>
+        <ul class="links-container">
+          <li><a href="/users/logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="forms-title">
+      <h1>User: <%= user%></h1>
+    </div>
+    <main>
+      <form>
+        <div class="forms-container">
+          <h1>Please enter the number of items:</h1>
+          <div class="formError"></div>
+          <div class="flex">
+            <label for="itemcount"><b>Item Count:</b></label>
+            <input
+              id="itemcount"
+              type="number"
+              placeholder="Numbers of items"
+              name="itemcount"
+              required
+            />
+          </div>
+          <button type="submit">Proceed</button>
+        </div>
+      </form>
+    </main>
+    <%- include('partials/footer.ejs') %>
+  </body>
+  <script>
+    const form = document.querySelector("form");
+    const formError = document.querySelector(".formError");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const itemcount = form.itemcount.value;
+
+      try {
+        const res = await fetch("/users/submit", {
+          method: "post",
+          body: JSON.stringify({ itemcount }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await res.json();
+        if (data.success) {
+          console.log(`${data.success}`);
+          location.assign("/users/submit");
+        } else {
+          console.log(`data error`);
+          formError.textContent = "Submission Error";
+        }
+      } catch (err) {
+        console.log(`fetch error`);
+        formError.textContent = "Submission Error";
+      }
+    });
+  </script>
+</html>

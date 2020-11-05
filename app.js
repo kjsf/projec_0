@@ -43,6 +43,8 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// test
+
 // routes
 app.use("/users", userRouter);
 app.use("/items", itemsRouter);

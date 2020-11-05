@@ -39,7 +39,7 @@ userRouter
   .route("/login")
   .get((req, res, next) => {
     if (req.cookies["jwt"]) {
-      res.status(302).redirect("/users/submit");
+      res.status(302).redirect("/users/items");
     } else {
       res.render("login");
     }
@@ -51,10 +51,23 @@ userRouter
     res.status(200).json({ success: true });
   });
 
-userRouter.get("/submit", authenticate.verifyOrdinaryUser, (req, res, next) => {
-  user = req.user.username;
-  res.render("submit", { user });
+userRouter.get("/items", authenticate.verifyOrdinaryUser, (req, res, next) => {
+  const user = req.user.username;
+  res.render("items", { user });
 });
+
+userRouter
+  .route("/submit")
+  .post(authenticate.verifyOrdinaryUser, (req, res, next) => {
+    const itemCount = req.body.itemcount;
+    res.cookie("count", itemCount, { httpOnly: true, maxAge: 60 * 60 * 1000 });
+    res.status(200).json({ success: true });
+  })
+  .get(authenticate.verifyOrdinaryUser, (req, res, next) => {
+    const user = req.user.username;
+    const count = req.cookies["count"];
+    res.render("submit", { user, count });
+  });
 
 userRouter.get("/logout", (req, res) => {
   req.logout();

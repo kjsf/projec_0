@@ -8,13 +8,11 @@ itemsRouter
   .route("/")
   .post(authenticate.verifyOrdinaryUser, async (req, res, next) => {
     try {
-      await Items.create({
-        user: req.user._id,
-        unitcode: req.body.unitcode,
-        unitcount: req.body.unitcount,
-        condition: req.body.condition,
-        remarks: req.body.remarks,
+      console.log(req.body);
+      const data = req.body.map((item) => {
+        return { ...item, user: req.user._id };
       });
+      await Items.insertMany(data);
       res.status(200).json({ success: true });
     } catch (e) {
       next(e);
