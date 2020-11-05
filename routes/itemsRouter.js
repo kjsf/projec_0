@@ -8,7 +8,6 @@ itemsRouter
   .route("/")
   .post(authenticate.verifyOrdinaryUser, async (req, res, next) => {
     try {
-      console.log(req.body);
       const data = req.body.map((item) => {
         return { ...item, user: req.user._id };
       });

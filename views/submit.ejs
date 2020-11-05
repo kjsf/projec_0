@@ -18,7 +18,7 @@
         <div class="forms-container">
           <h1>Please enter the item information:</h1>
           <div class="formError"></div>
-          <%for (let i=1;i< +count + +1;i++){%> <%console.log([i])%>
+          <%for (let i=1;i< +count + +1;i++){%>
           <h1 class="itemNumber">--- Item <%= [i]%> ---</h1>
           <div class="flex">
             <label for="unitcode<%=[i]%>"><b>Code:</b></label>
@@ -69,6 +69,7 @@
     <%- include('partials/footer.ejs') %>
   </body>
   <script>
+
     const form = document.querySelector("form");
     const formError = document.querySelector(".formError");
 
@@ -99,7 +100,7 @@
         const data = await res.json();
         if (data.success) {
           alert("Submission Successful");
-          location.assign("/");
+          location.assign("/users/items");
         } else {
           formError.textContent = "Submission Error";
         }

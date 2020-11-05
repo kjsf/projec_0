@@ -51,14 +51,11 @@
         });
         const data = await res.json();
         if (data.success) {
-          console.log(`${data.success}`);
           location.assign("/users/submit");
         } else {
-          console.log(`data error`);
           formError.textContent = "Submission Error";
         }
       } catch (err) {
-        console.log(`fetch error`);
         formError.textContent = "Submission Error";
       }
     });
